@@ -12,6 +12,11 @@ const CardContainer = styled(Link)`
   height: auto;
   max-width: 15%;
   text-decoration: none;
+  transition: opacity 500ms ease-out 0.3s;
+  
+  &:hover {
+    opacity: 0.5;
+  }
   
   @media (max-width: ${theme.viewports.tablet}) {
     flex-basis: 100%;
@@ -21,19 +26,17 @@ const CardContainer = styled(Link)`
 `;
 
 const CardContent = styled.div`
-  background: url(${props => props.background}) no-repeat;
   background-size: cover;
-  background-position: 50%;
+  background: url(${props => props.background}) no-repeat 50%;
   border-radius: 3px;
   width: 100%;
   height: 250px;
-  -webkit-transition-property: opacity;
-  transition-property: opacity;
-  -webkit-transition-duration: .3s;
-  transition-duration: .3s;
-  -webkit-transition-timing-function: cubic-bezier(.3,0,.4,1);
-  transition-timing-function: cubic-bezier(.3,0,.4,1);
+  transition: height ease-in-out 0.2s;
   cursor: pointer;
+  
+  &:hover {
+    height: 270px;
+  }
 `;
 
 const CardDescription = styled.div`

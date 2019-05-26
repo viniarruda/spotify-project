@@ -8,6 +8,7 @@ const IconPlay = styled(FontAwesomeIcon)`
   color: ${theme.colors.primary};
   cursor: pointer;
   flex: 1;
+  transition: all ease 0.3s;
 `;
 
 const PlayButton = (props) => (
