@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from './theme'
+import api from '../utils/services'
 
 const BackDrop = styled.div`
   justify-content: center;
@@ -35,7 +36,7 @@ const Modal = (props) => {
     <BackDrop>
       <Background>
         <Message>Token expirado!</Message>
-        <a href="http://localhost:8888/login">Gerar novo token!</a>
+        <a href={api.server + '/login'}>Gerar novo token!</a>
       </Background>
     </BackDrop>
   )

@@ -84,7 +84,7 @@ const Home = (props) => {
               {
                 spotify.list &&
                 spotify.list.artists.items && spotify.list.artists.items.map(a =>
-                  <Card key={a.id} title={a.name} images={a.images} id={a.id}/>
+                  <Card key={a.id} title={a.name} images={a.images}/>
                 )  //<Text>Nenhum artista encontrado</Text>
               }
             </List>
@@ -95,7 +95,7 @@ const Home = (props) => {
               {
                 spotify.list &&
                 spotify.list.tracks.items && spotify.list.tracks.items.map(a =>
-                  <Card key={a.id} title={a.name} id={a.id}/>
+                  <Card key={a.id} title={a.name} />
                 )
               }
             </List>

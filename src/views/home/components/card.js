@@ -60,7 +60,7 @@ const CardDescriptionArtist = styled.h3`
 `;
 
 const Card = (props) => (
-  <CardContainer to={'/albums/' + props.id}>
+  <CardContainer to={props.id ? '/albums/' + props.id : '#'}>
     <CardContent background={props.images && props.images.length > 0 ? props.images[1].url : 'https://imagens.canaltech.com.br/empresas/698.400.jpg'} />
     <CardDescription>
       <CardDescriptionName>{props.title}</CardDescriptionName>

@@ -1,6 +1,6 @@
 const api = {
-  url: 'https://5cdefc046f4437001467ad3d.mockapi.io',
-  spotify: 'https://api.spotify.com/v1'
+  spotify: process.env.REACT_APP_PROD,
+  server: process.env.REACT_APP_DEV
 };
 
 export default api

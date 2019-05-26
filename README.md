@@ -12,6 +12,17 @@ This project use:
 - FontAwesome
 
 
+Use enviroment variables: 
+If you need modify, change in file ```.env```
+
+```
+
+REACT_APP_DEV: http://localhost:8888
+REACT_APP_HML: https://homolog.site.com
+REACT_APP_PROD: http://prod.site.com
+
+```
+
 
 ## Run
 
