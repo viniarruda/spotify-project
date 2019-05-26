@@ -43,13 +43,13 @@ If I use redux, I use the structure like this:
     │   ├── views                    # Views
     │   ├── store                    # Global state, reducers, actions, queries
     │   │   └── reducers.js          # Combine Reducers   
-    │   │    └── index.js            # Create store, adding middlewares
-    │   │    └── auth                # Name of props. Ex: Products, Cart, User, Auth
-    │   │        └── action-types.js # The name of actions
-    │   │        └── actions.js      # Use createActions for redux-actions
-    │   │        └── queries.js      # Axios/Fetch requests
-    │   │        └── reducers.js     # Initial State of redux props and reducers
-    │   │        └── thunks.js       # Redux thunk to organize and call all the actions/queries
+    │   │   └── index.js             # Create store, adding middlewares
+    │   │   └── auth                 # Name of props. Ex: Products, Cart, User, Auth
+    │   │       └── action-types.js  # The name of actions
+    │   │       └── actions.js       # Use createActions for redux-actions
+    │   │       └── queries.js       # Axios/Fetch requests
+    │   │       └── reducers.js      # Initial State of redux props and reducers
+    │   │       └── thunks.js        # Redux thunk to organize and call all the actions/queries
     │   └── utils                    # Helpers (axios, api, storage, etc...)
     ├── index.js                     # Register and initialize the app. Implement the route file
     └── .env                         # Global constants
