@@ -8,6 +8,11 @@ const InfoContent = styled.div`
   align-items: center;
   flex: 1;
   flex-basis: 30%;
+  
+  @media (max-width: ${theme.viewports.tablet}) {
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
 `;
 
 const AlbumImage = styled.img`

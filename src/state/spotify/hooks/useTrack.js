@@ -10,7 +10,6 @@ const useTrack = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const setMusic = async (id) => {
-    console.log(id)
     setIsLoading(true);
 
     const response = await loadTrack(id);

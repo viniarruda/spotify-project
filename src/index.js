@@ -4,7 +4,7 @@ import {
 } from 'react-dom'
 import Root from './routes'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserCircle, faChevronLeft, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
+import { faUserCircle, faChevronLeft, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons'
 
 import registerServiceWorker from './registerServiceWorker'
 
@@ -14,5 +14,5 @@ render( <
     document.getElementById('root')
 );
 
-library.add(faUserCircle, faChevronLeft, faPlayCircle);
+library.add(faUserCircle, faChevronLeft, faPlayCircle, faPauseCircle);
 registerServiceWorker();

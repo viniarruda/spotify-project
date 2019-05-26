@@ -9,6 +9,7 @@ This project use:
 - React-Player
 - LocalStorage for api token
 - Styled-components
+- FontAwesome
 
 
 

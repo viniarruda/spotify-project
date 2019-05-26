@@ -20,37 +20,34 @@ const Detail = (props) => {
   const [track, loading, setMusic] = useTrack();
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
+  const [playing, setPlaying] = useState('');
+  const [actualMusic, setActualMusic] = useState('');
 
   useEffect(() => {
-    console.log(props);
-    if (!spotify.album || spotify.album.length === 0) {
-      setAlbum(props.match.params.artist);
-    }
+    setAlbum(props.match.params.artist);
   }, []);
 
-  const handlePlayMusic = (track_id) => {
+  const handlePlayMusic = (trackSelected) => {
     if(!track.music || track.music.length === 0) {
-      setMusic(track_id);
+      setMusic(trackSelected.id);
     }
-    setPlay(!play);
+    setPlay(true);
+    setPlaying(trackSelected.preview_url);
+    setActualMusic(trackSelected.name);
   };
 
   const handleMusic = () => {
-    console.log('oi')
     setPlay(!play);
   };
 
   const handleChangeVolume = (e) => {
-    setVolume(e);
+    setVolume(Number(e));
   };
 
   return (
     <Container>
       <Spinner show={isLoading || loading} />
       <Content>
-        {
-          console.log(spotify)
-        }
         <BackButton link='/home'>Voltar</BackButton>
         {
           spotify.album &&
@@ -59,14 +56,14 @@ const Detail = (props) => {
               <MusicsList>
               {
                 spotify.tracks && spotify.tracks.items.map((track) =>
-                  <MusicsItem key={track.id} {...track} onClick={() => handlePlayMusic(track.id)}/>
+                  <MusicsItem key={track.id} {...track} onClick={() => handlePlayMusic(track)}/>
                 )
               }
               </MusicsList>
             </DetailAlbum>
           }
         {
-          track.music && <Player music={track.music} play={play} volume={volume} onClick={() => handleMusic()} onChange={(e) => handleChangeVolume(e) }/>
+          track.music && <Player music={track.music} actual={actualMusic} playing={playing} play={play} volume={volume} onClick={() => handleMusic()} onChange={(e) => handleChangeVolume(e) }/>
         }
       </Content>
     </Container>

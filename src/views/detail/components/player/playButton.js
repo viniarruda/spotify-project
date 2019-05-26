@@ -7,10 +7,11 @@ const IconPlay = styled(FontAwesomeIcon)`
   font-size: ${theme.fontSizes.title};
   color: ${theme.colors.primary};
   cursor: pointer;
+  flex: 1;
 `;
 
 const PlayButton = (props) => (
-  <IconPlay icon="play-circle" onClick={() => props.onClick()}/>
+  <IconPlay icon={props.play ? "pause-circle" : "play-circle"} onClick={() => props.onClick()}/>
 );
 
 export default PlayButton;

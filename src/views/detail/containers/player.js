@@ -2,17 +2,17 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import Container from '../components/player/playerContainer'
 import PlayButton from '../components/player/playButton'
+import PlayerRange from '../components/player/playerRange'
+import PlayNow from '../components/player/playNow'
 
 const Player = (props) => {
-  const { music, onClick, onChange, play, volume } = props;
+  const { onClick, onChange, play, volume, playing, actual } = props;
   return (
     <Container>
-      {
-        console.log('music', music)
-      }
-      <PlayButton onClick={onClick} />
-      <input type="range" step="any" min="0" max="1" onChange={(e) => onChange(e.target.value)}  value={volume} />
-      <ReactPlayer url={music.preview_url} playing={play} volume={volume} width="100px" height="50px" />
+      <PlayNow>Tocando: {actual}</PlayNow>
+      <PlayButton onClick={onClick} play={play} />
+      <PlayerRange onChange={(e) => onChange(e)} volume={volume} />
+      <ReactPlayer url={playing} playing={play} volume={volume} width="0px" height="0px" />
     </Container>
   )
 };

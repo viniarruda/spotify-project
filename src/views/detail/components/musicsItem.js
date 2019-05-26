@@ -16,6 +16,10 @@ const MusicItemDescription = styled.span`
   font-weight: 300;
   color: ${theme.colors.secondary};
   flex: 1;
+  @media (max-width: ${theme.viewports.tablet}) {
+    flex-basis: 80%;
+    line-height: 1.3;
+  }
 `;
 
 const MusicItemNumber = styled.span`

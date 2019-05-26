@@ -21,10 +21,10 @@ const Home = (props) => {
   const [spotify, isLoading, setListProfile] = useProfile();
   const [search, loading, setSearch] = useSearch();
   const [auth, setToken] = useToken();
-  const [term, setTerm] = useState();
+  const [term, setTerm] = useState('');
 
   useEffect(() => {
-    if (!auth.token) {
+    if (!auth.token && props.location.hash) {
       setToken(props.location.hash);
     } else {
       setToken(localStorage.getItem('access_token'));
@@ -36,7 +36,7 @@ const Home = (props) => {
 
   const handleChange = async (e) => {
     await setTerm(e);
-    await setSearch(e);
+    if (e !== '') await setSearch(e);
   };
 
   return ( 
@@ -51,42 +51,45 @@ const Home = (props) => {
           term && <NotFound>Resultados encontrados para "{term}"</NotFound>
         }
         {
-          search.list && search.list.albums.items.length > 0 ?
-            <Results>
+          search.list && search.list.albums.items.length > 0 &&
+          <Results>
+            {
+              search.list && search.list.albums.items && <Title>Albums</Title>
+            }
+            <List>
               {
-                search.list && search.list.albums.items && <Title>Albums</Title>
+                search.list &&
+                search.list.albums.items && search.list.albums.items.map(a =>
+                  <Card key={a.id} title={a.name} artists={a.artists} images={a.images} id={a.id}/>
+                )
               }
-              <List>
-                {
-                  search.list &&
-                  search.list.albums.items && search.list.albums.items.map(a =>
-                    <Card key={a.id} title={a.name} artists={a.artists} images={a.images} id={a.id} />
-                  )
-                }
-              </List>
+            </List>
+            {
+              search.list && search.list.artists.items && <Title>Artistas</Title>
+            }
+            <List>
               {
-                search.list && search.list.artists.items && <Title>Artistas</Title>
+                search.list &&
+                search.list.artists.items && search.list.artists.items.map(a =>
+                  <Card key={a.id} title={a.name} images={a.images} id={a.id}/>
+                )  //<Text>Nenhum artista encontrado</Text>
               }
-              <List>
-                {
-                  search.list &&
-                  search.list.artists.items && search.list.artists.items.map(a =>
-                    <Card key={a.id} title={a.name} images={a.images} id={a.id} />
-                  )  //<Text>Nenhum artista encontrado</Text>
-                }
-              </List>
+            </List>
+            {
+              search.list && search.list.tracks.items && <Title>Músicas</Title>
+            }
+            <List>
               {
-                search.list && search.list.tracks.items && <Title>Músicas</Title>
+                search.list &&
+                search.list.tracks.items && search.list.tracks.items.map(a =>
+                  <Card key={a.id} title={a.name} id={a.id}/>
+                )
               }
-              <List>
-                {
-                  search.list &&
-                  search.list.tracks.items && search.list.tracks.items.map(a =>
-                    <Card key={a.id} title={a.name} id={a.id} />
-                  )
-                }
-              </List>
-            </Results> : <Text>Nenhum resultado encontrado</Text>
+            </List>
+          </Results>
+        }
+        {
+          search.list && search.list.albums.items.length === 0 && <Text>Nenhum resultado encontrado</Text>
         }
       </Content>
     </Container>

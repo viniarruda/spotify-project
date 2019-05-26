@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../../components/theme'
 
 const Container = styled.div`
   width: 100%;
@@ -12,6 +13,9 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  @media (max-width: ${theme.viewports.tablet}) {
+    background: ${theme.colors.background};
+  }
 `;
 
 export default Container;

@@ -9,8 +9,7 @@ const useToken = () => {
 
   const data = async (payload) => {
     let parsed = queryString.parse(payload);
-    console.log(parsed);
-    localStorage.setItem('access_token', parsed.access_token);
+    if (localStorage.length === 0) localStorage.setItem('access_token', parsed.access_token);
     dispatch(setToken(parsed))
   };
 
