@@ -6,8 +6,6 @@ import Root from './routes'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserCircle, faChevronLeft, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons'
 
-import registerServiceWorker from './registerServiceWorker'
-
 
 render( <
     Root /> ,
@@ -15,4 +13,3 @@ render( <
 );
 
 library.add(faUserCircle, faChevronLeft, faPlayCircle, faPauseCircle);
-registerServiceWorker();
