@@ -21,6 +21,7 @@ If you need modify, change in file ```.env```
 ```
 
 REACT_APP_DEV: http://localhost:8888
+REACT_APP_SERVER_PROD = https://spotify-authentication-backend.herokuapp.com
 REACT_APP_HML: https://homolog.site.com
 REACT_APP_PROD: http://prod.site.com
 
@@ -64,6 +65,8 @@ If I use redux, I use the structure like this:
 The server is running in Heroku. The first time have a few delay, because the server stay in sleep
 
 ### Client Project
+
+```git clone git@github.com:viniarruda/spotify-project.git```
 
 ```cd spotify-project```
 
