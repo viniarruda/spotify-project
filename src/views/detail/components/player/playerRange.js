@@ -4,14 +4,17 @@ import theme from '../../../../components/theme'
 
 const Range = styled.div`
   flex: 1;
-  text-align: right;
+  text-align: center;
+  
+  @media (max-width: ${theme.viewports.tablet}) {
+    padding-right: 10px;
+  }
 `;
 
 const Input = styled.input`
   -webkit-appearance: none;
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    border: 10;
     height: 15px;
     width: 15px;
     border-radius: 50%;

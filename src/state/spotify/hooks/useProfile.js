@@ -22,7 +22,7 @@ const useProfile = () => {
     setIsLoading(false)
   };
 
-  return [spotify, isLoading, request]
+  return [isLoading, request]
 };
 
 export default useProfile

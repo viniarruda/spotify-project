@@ -18,7 +18,7 @@ const SearchForm = (props) => {
   return (
     <Filter>
       <Text>Busque por artistas, álbuns ou músicas</Text>
-      <Input type="text" placeholder="Comece a escrever..." onChange={(e) => props.onChange(e.target.value)} value={props.textSearch} />
+      <Input type="text" placeholder="Comece a escrever..." onChange={(e) => props.onChange(e.target.value)} value={props.textSearch} onBlur={(e) => props.onBlur(e.target.value)} />
     </Filter>
   )
 };

@@ -4,6 +4,7 @@ import React, {
 import useProfile from '../../state/spotify/hooks/useProfile'
 import useSearch from '../../state/spotify/hooks/useSearch'
 import useToken from '../../state/auth/hooks/useToken'
+import { useStateValue } from '../../state/'
 
 import Spinner from '../../components/spinner'
 import Container from './containers/container'
@@ -18,10 +19,12 @@ import Title from '../../components/title'
 import NotFound from './components/notFound'
 
 const Home = (props) => {
-  const [spotify, isLoading, setListProfile] = useProfile();
-  const [search, loading, setSearch] = useSearch();
+  const [isLoading, setListProfile] = useProfile();
+  const [searchLoading, setSearch] = useSearch();
+  const [{spotify}] = useStateValue();
   const [auth, setToken] = useToken();
   const [term, setTerm] = useState('');
+  const [lastSearch, setLastSearch] = useState([]);
 
   useEffect(() => {
     if (!auth.token && props.location.hash) {
@@ -32,6 +35,9 @@ const Home = (props) => {
     if (!spotify.list || spotify.list.length === 0) {
       setListProfile();
     }
+    if ( localStorage.getItem(('last_result')) ) {
+      setLastSearch(JSON.parse(localStorage.getItem('last_result')));
+    }
   }, []);
 
   const handleChange = async (e) => {
@@ -39,49 +45,56 @@ const Home = (props) => {
     if (e !== '') await setSearch(e);
   };
 
+  const handleBlur = (e) => {
+    let lastResult = spotify.list.albums.items;
+    if (e !== '') {
+      localStorage.setItem('last_result', JSON.stringify(lastResult));
+    }
+  };
+
   return ( 
     <Container>
-      <Spinner show = {isLoading || loading} />
+      <Spinner show = {isLoading || searchLoading} />
       {
         !localStorage.getItem('access_token') && <Modal />
       }
       <Content>
-        <SearchForm onChange={(e) => handleChange(e)} />
+        <SearchForm onChange={(e) => handleChange(e)} onBlur={(e) => handleBlur(e)}/>
         {
           term && <NotFound>Resultados encontrados para "{term}"</NotFound>
         }
         {
-          search.list && search.list.albums.items.length > 0 &&
+          spotify.list && spotify.list.albums.items.length > 0 &&
           <Results>
             {
-              search.list && search.list.albums.items && <Title>Albums</Title>
+              spotify.list && spotify.list.albums.items && <Title>Albums</Title>
             }
             <List>
               {
-                search.list &&
-                search.list.albums.items && search.list.albums.items.map(a =>
+                spotify.list &&
+                spotify.list.albums.items && spotify.list.albums.items.map(a =>
                   <Card key={a.id} title={a.name} artists={a.artists} images={a.images} id={a.id}/>
                 )
               }
             </List>
             {
-              search.list && search.list.artists.items && <Title>Artistas</Title>
+              spotify.list && spotify.list.artists.items && <Title>Artistas</Title>
             }
             <List>
               {
-                search.list &&
-                search.list.artists.items && search.list.artists.items.map(a =>
+                spotify.list &&
+                spotify.list.artists.items && spotify.list.artists.items.map(a =>
                   <Card key={a.id} title={a.name} images={a.images} id={a.id}/>
                 )  //<Text>Nenhum artista encontrado</Text>
               }
             </List>
             {
-              search.list && search.list.tracks.items && <Title>Músicas</Title>
+              spotify.list && spotify.list.tracks.items && <Title>Músicas</Title>
             }
             <List>
               {
-                search.list &&
-                search.list.tracks.items && search.list.tracks.items.map(a =>
+                spotify.list &&
+                spotify.list.tracks.items && spotify.list.tracks.items.map(a =>
                   <Card key={a.id} title={a.name} id={a.id}/>
                 )
               }
@@ -89,7 +102,20 @@ const Home = (props) => {
           </Results>
         }
         {
-          search.list && search.list.albums.items.length === 0 && <Text>Nenhum resultado encontrado</Text>
+          spotify.list && spotify.list.albums.items.length === 0 && <Text>Nenhum resultado encontrado</Text>
+        }
+        {
+          !spotify.list && lastSearch.length > 0 &&
+            <Results>
+              <Text>Últimos albums pesquisados</Text>
+              <List>
+                {
+                  lastSearch.map((last) =>
+                    <Card key={last.id} title={last.name} id={last.id} images={last.images} />
+                  )
+                }
+              </List>
+            </Results>
         }
       </Content>
     </Container>
