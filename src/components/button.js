@@ -6,7 +6,7 @@ const Button = styled.button`
     background: ${props => theme.colors[Object.keys(props).find(p => theme.colors[p])] || theme.colors.primary};
     text-transform: ${props => props.upper ? 'uppercase' : 'none'};
     font-weight: 300;
-    color: ${theme.colors.default};
+    color: ${theme.colors.secondary};
     padding: 9px 13px;
     margin: 1px;
     border: none;

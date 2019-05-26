@@ -4,7 +4,7 @@ import reset from 'styled-reset'
 const BaseStyles = createGlobalStyle`
     ${reset}
     body { margin: 0 };
-    html { font-family: 'Montserrat', sans-serif; }
+    html { font-family: 'Roboto', sans-serif; }
     * { box-sizing: border-box; };
 `;
 

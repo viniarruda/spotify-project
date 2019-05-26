@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 import theme from '../../../components/theme'
 
-
-const List = styled.div`
+const Content = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
+  padding: 40px;
+  min-width: 1000px;
   
   @media (max-width: ${theme.viewports.tablet}) {
-    flex-flow: column;
+    min-width: initial;
   }
 `;
 
-export default List
+export default Content

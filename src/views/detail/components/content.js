@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import theme from './theme'
 
 const Content = styled.div`
-  width: 100%;
-  background: ${theme.colors.background}
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  
 `;
 
 export default Content

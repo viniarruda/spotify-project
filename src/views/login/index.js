@@ -3,12 +3,17 @@ import React, { useEffect } from 'react'
 import useLogin from '../../state/auth/hooks/useLogin'
 
 import Container from './containers/container'
-import Form from './containers/form'
-import Spinner from '../../components/spinner'
+import Button from '../../components/button'
+import SpotifyLogo from '../../assets/images/spotify_login.png'
+import Logo from './components/logo'
 
 const Login = (props) => {
   const { from } = props.location.state || {from: {pathname: "/home"}};
-  const [auth, setLogin, isLoading] = useLogin();
+  const [auth, setLogin] = useLogin();
+
+  const handleLogin = async () => {
+    await setLogin();
+  };
 
   useEffect(() => {
     if (auth.logged) {
@@ -18,8 +23,8 @@ const Login = (props) => {
 
   return (
     <Container>
-      <Spinner show={isLoading} />
-      <Form onSubmit={(values, actions) => setLogin({values, actions})} />
+      <Logo src={SpotifyLogo} alt="Logo Spotify" />
+      <Button onClick={() => handleLogin()}>Login</Button>
     </Container>
   )
 };

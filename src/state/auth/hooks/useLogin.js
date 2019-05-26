@@ -1,23 +1,16 @@
-import { useState } from 'react'
 import { useStateValue } from '../../index'
 import {
   login
 } from '../actions'
 
-const useProducts = () => {
-  const [{auth}, dispatch] = useStateValue()
-  const [isLoading, setIsLoading] = useState(false)
+const useLogin = () => {
+  const [{auth}, dispatch] = useStateValue();
 
-  const formData = async ({values, actions}) => {
-    setIsLoading(true)
+  const formData = async () => {
+    dispatch(login())
+  };
 
-    setIsLoading(false)
-    if (values.username !== '' && values.password !== '') {
-      dispatch(login())
-    }
-  }
+  return [auth, formData]
+};
 
-  return [auth, formData, isLoading]
-}
-
-export default useProducts
+export default useLogin
