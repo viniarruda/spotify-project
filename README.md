@@ -61,16 +61,7 @@ If I use redux, I use the structure like this:
 
 ### Server Project
 
-You need clone the server repository: [back-end repo](https://github.com/viniarruda/spotify-project-backend)
-
-```git clone git@github.com:viniarruda/spotify-project-backend.git```
-
-Move to spotify-project-backend in your computer(```cd spotify-project-backend```) and run: ```npm i```
-
-After download all dependencies, run: ```cd /authorization_code ``` and ```node app.js```
-
-The server running in port ````8888```` and client in ```3000```
-
+The server is running in Heroku. The first time have a few delay, because the server stay in sleep
 
 ### Client Project
 
