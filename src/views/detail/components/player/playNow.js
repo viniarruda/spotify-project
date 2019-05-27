@@ -7,7 +7,7 @@ const PlayNow = styled.div`
   color: ${theme.colors.title};
   font-weight: 300;
   font-size: ${theme.fontSizes.small};
-  animation: shake 0.92s cubic-bezier(.36,.07,.19,.97) both infinite;
+  //animation: shake 0.92s cubic-bezier(.36,.07,.19,.97) both infinite;
   @media (max-width: ${theme.viewports.tablet}) {
     flex-basis: 100%;
   }
