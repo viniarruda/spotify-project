@@ -5,6 +5,7 @@ import {
 import Root from './routes'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserCircle, faChevronLeft, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons'
+import dotenv from 'dotenv'
 
 
 render( <
@@ -13,3 +14,5 @@ render( <
 );
 
 library.add(faUserCircle, faChevronLeft, faPlayCircle, faPauseCircle);
+module.hot.accept();
+dotenv.config();

@@ -1,6 +1,6 @@
 const api = {
-  spotify: process.env.REACT_APP_API,
-  server: process.env.REACT_APP_SERVER
+  spotify: process.env.API,
+  server: process.env.SERVER
 };
 
 export default api

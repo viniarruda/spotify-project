@@ -52,7 +52,7 @@ const Home = (props) => {
     }
   };
 
-  return ( 
+  return (
     <Container>
       <Spinner show = {isLoading || searchLoading} />
       {
