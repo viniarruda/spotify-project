@@ -12,7 +12,8 @@ const useSearch = () => {
   const request = async (payload) => {
     setIsLoading(true);
 
-    const encode = encodeURI(payload);
+    const toLowerCase = payload.toLowerCase();
+    const encode = encodeURI(toLowerCase);
     const response = await search(encode);
 
     if (response) {

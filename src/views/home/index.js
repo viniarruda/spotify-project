@@ -66,9 +66,7 @@ const Home = (props) => {
         {
           spotify.list && spotify.list.albums.items.length > 0 &&
           <Results>
-            {
-              spotify.list && spotify.list.albums.items && <Title>Albums</Title>
-            }
+            <Title>Albums</Title>
             <List>
               {
                 spotify.list &&
@@ -78,7 +76,7 @@ const Home = (props) => {
               }
             </List>
             {
-              spotify.list && spotify.list.artists.items && <Title>Artistas</Title>
+              spotify.list && spotify.list.artists.items.length > 0 && <Title>Artistas</Title>
             }
             <List>
               {
@@ -89,7 +87,7 @@ const Home = (props) => {
               }
             </List>
             {
-              spotify.list && spotify.list.tracks.items && <Title>Músicas</Title>
+              spotify.list && spotify.list.tracks.items.lenght > 0 && <Title>Músicas</Title>
             }
             <List>
               {
