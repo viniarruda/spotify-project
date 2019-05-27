@@ -30,7 +30,7 @@ REACT_APP_PROD: http://prod.site.com
 ### Context + Hooks VS Redux
 
 I used Context + hooks to create a global State, this method use the hook ```useReducer```.
-The method is equals to redux in reducers/actions. In this project the custom hook does the same thing as the redux thunk. 
+The method is equals to redux in reducers/actions.
 
 In this project the custom hook does the same as the redux thunk. To create a new custom hook, you need to use the prefix use before the name. Example: useCustomHook.
 
