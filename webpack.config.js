@@ -27,6 +27,12 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new Dotenv({
+      path: "./.env",
+      safe: true
+    })
+  ],
   devServer: {
     contentBase: path.join(__dirname, "./public"),
     port: 3000,

@@ -42,7 +42,7 @@ const UserName = styled.span`
 `;
 
 const Header = props => {
-  const { auth, spotify } = props;
+  const { auth, spotify, requestLogout } = props;
 
   const handleLogout = async () => {
     await requestLogout();
@@ -69,4 +69,9 @@ const mapStateToProps = state => ({
   spotify: state.spotify
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(
+  mapStateToProps,
+  {
+    requestLogout
+  }
+)(Header);
