@@ -1,14 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import LogoImage from '../assets/images/logo.png'
-import theme from './theme'
+import React from "react";
+import { connect } from "react-redux";
+import { requestLogout } from "../store/auth/thunks";
+import styled from "styled-components";
+import LogoImage from "../assets/images/logo.png";
+import theme from "./theme";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useStateValue } from '../state'
-import { logout } from '../state/auth/actions'
-
-import Button from './button'
+import Button from "./button";
 import useProfile from "../state/spotify/hooks/useProfile";
 
 const Nav = styled.div`
@@ -16,9 +15,9 @@ const Nav = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0 20px;    
+  padding: 0 20px;
   background: ${theme.colors.background};
-  position: ${props => props.fixed ? 'fixed' : 'relative'};
+  position: ${props => (props.fixed ? "fixed" : "relative")};
 `;
 
 const Right = styled.nav`
@@ -27,8 +26,8 @@ const Right = styled.nav`
 `;
 
 const Logo = styled.img`
-   margin: 0;
-   width: 30px;
+  margin: 0;
+  width: 30px;
 `;
 
 const UserIcon = styled(FontAwesomeIcon)`
@@ -43,30 +42,32 @@ const UserName = styled.span`
   text-transform: uppercase;
 `;
 
-const Header = (props) => {
-  const [{auth}, dispatch] = useStateValue();
-  const [spotify] = useProfile();
+const Header = props => {
+  const { auth, spotify } = props;
 
   const handleLogout = async () => {
-    await dispatch(logout())
+    await dispatch(requestLogout());
   };
 
   return (
     <Nav>
-      <Logo src={LogoImage} alt='Logo Spotify' />
-      {
-        auth.logged &&
-          <Right>
-            {
-              spotify.user && <UserName>{spotify.user.display_name}</UserName>
-            }
-            <UserIcon icon="user-circle" />
-            <Button primary onClick={() => handleLogout()}>Logout</Button>
-          </Right>
-      }
+      <Logo src={LogoImage} alt="Logo Spotify" />
+      {auth.logged && (
+        <Right>
+          {spotify.user && <UserName>{spotify.user.display_name}</UserName>}
+          <UserIcon icon="user-circle" />
+          <Button primary onClick={() => handleLogout()}>
+            Logout
+          </Button>
+        </Right>
+      )}
     </Nav>
-  )
-}
+  );
+};
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  spotify: state.spotify
+});
 
-export default Header
+export default connect(mapStateToProps)(Header);

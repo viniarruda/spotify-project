@@ -1,39 +1,37 @@
-import React from 'react'
-import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
-import {StateProvider} from '../state';
-import { INITIAL_STATE as AUTH_INITIAL_STATE } from '../state/auth/reducers'
-import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from '../state/spotify/reducers'
-import reducers from "../state/reducers";
-import BaseStyles from './base-styles';
-import PrivateRoute from './private-route'
-import Content from '../components/content'
-import Header from '../components/header'
-import Login from '../views/login'
-import Home from '../views/home'
-import Detail from '../views/detail'
+import React from "react";
+import PropTypes from "prop-types";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import BaseStyles from "./base-styles";
+import PrivateRoute from "./private-route";
+import Content from "../components/content";
+import Header from "../components/header";
+import Login from "../views/login";
+import Home from "../views/home";
+import Detail from "../views/detail";
 
-const Root = props => {
-    const initialState = {
-      auth: AUTH_INITIAL_STATE,
-      product: PRODUCT_INITIAL_STATE
-    }
-    return (
-      <StateProvider initialState={initialState} reducer={reducers}>
-        <BaseStyles />
-        <Router>
-          <>
-            <Header />
-            <Content>
-              <Switch>
-                <Route exact path="/" component={Login} />
-                <PrivateRoute path="/home" component={Home} />
-                <PrivateRoute path="/albums/:artist" component={Detail}/>
-              </Switch>
-            </Content>
-          </>
-        </Router>
-      </StateProvider>
-    )
+const Root = ({ store }) => {
+  return (
+    <Provider store={store}>
+      <BaseStyles />
+      <Router>
+        <>
+          <Header />
+          <Content>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <PrivateRoute path="/home" component={Home} />
+              <PrivateRoute path="/albums/:artist" component={Detail} />
+            </Switch>
+          </Content>
+        </>
+      </Router>
+    </Provider>
+  );
 };
 
-export default Root
+Root.propTypes = {
+  store: PropTypes.object.isRequired
+};
+
+export default Root;

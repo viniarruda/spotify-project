@@ -1,32 +1,43 @@
-import React, { useEffect } from 'react'
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { requestLogin } from "../../store/auth/thunks";
 
-import useLogin from '../../state/auth/hooks/useLogin'
+import Container from "./containers/container";
+import Button from "../../components/button";
+import SpotifyLogo from "../../assets/images/spotify_login.png";
+import Logo from "./components/logo";
 
-import Container from './containers/container'
-import Button from '../../components/button'
-import SpotifyLogo from '../../assets/images/spotify_login.png'
-import Logo from './components/logo'
-
-const Login = (props) => {
-  const { from } = props.location.state || {from: {pathname: "/home"}};
-  const [auth, setLogin] = useLogin();
-
-  const handleLogin = async () => {
-    await setLogin();
+class Login extends Component {
+  handleLogin = async () => {
+    await this.props.requestLogin();
   };
 
-  useEffect(() => {
-    if (auth.logged) {
-      props.history.push(from);
+  render() {
+    const { from } = this.props.location.state || {
+      from: { pathname: "/home" }
+    };
+
+    if (this.props.auth.logged) {
+      return <Redirect to={from} />;
     }
-  }, [auth]);
 
-  return (
-    <Container>
-      <Logo src={SpotifyLogo} alt="Logo Spotify" />
-      <Button onClick={() => handleLogin()}>Login</Button>
-    </Container>
-  )
-};
+    return (
+      <Container>
+        <Logo src={SpotifyLogo} alt="Logo Spotify" />
+        <Button onClick={this.handleLogin}>Login</Button>
+      </Container>
+    );
+  }
+}
 
-export default Login
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    requestLogin
+  }
+)(Login);
