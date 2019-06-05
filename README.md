@@ -1,5 +1,9 @@
 # spotify-project
 
+This project have 2 structures:
+
+- **Webpack + Redux** in branch: `webpack`
+- **React-script + Global State with Context and Hooks** in branch: `master`
 
 This project use:
 
@@ -11,12 +15,10 @@ This project use:
 - Styled-components
 - FontAwesome
 
+I use [my boilerplate](https://github.com/viniarruda/react-boilerplate) to create this project, despite using create-react-app, it is fully modified, leaving only the original project react-scripts.
 
-I use [my boilerplate](https://github.com/viniarruda/react-boilerplate) to create this project, despite using create-react-app, it is fully modified, leaving only the original project react-scripts. 
-
-
-Use enviroment variables: 
-If you need modify, change in file ```.env```
+Use enviroment variables:
+If you need modify, change in file `.env`
 
 ```
 
@@ -29,7 +31,7 @@ REACT_APP_PROD: http://prod.site.com
 
 ### Context + Hooks VS Redux
 
-I used Context + hooks to create a global State, this method use the hook ```useReducer```.
+I used Context + hooks to create a global State, this method use the hook `useReducer`.
 The method is equals to redux in reducers/actions.
 
 In this project the custom hook does the same as the redux thunk. To create a new custom hook, you need to use the prefix use before the name. Example: useCustomHook.
@@ -38,12 +40,12 @@ If I use redux, I use the structure like this:
 
 ```
     ├── ...
-    ├── src                       
+    ├── src
     │   ├── components               # Common components
     │   ├── routes                   # Routes configuration
     │   ├── views                    # Views
     │   ├── store                    # Global state, reducers, actions, queries
-    │   │   └── reducers.js          # Combine Reducers   
+    │   │   └── reducers.js          # Combine Reducers
     │   │   └── index.js             # Create store, adding middlewares
     │   │   └── auth                 # Name of props. Ex: Products, Cart, User, Auth
     │   │       └── action-types.js  # The name of actions
@@ -57,7 +59,6 @@ If I use redux, I use the structure like this:
 
 ```
 
-
 ## Run
 
 ### Server Project
@@ -66,17 +67,14 @@ The server is running in Heroku. The first time have a few delay, because the se
 
 ### Client Project
 
-```git clone git@github.com:viniarruda/spotify-project.git```
+`git clone git@github.com:viniarruda/spotify-project.git`
 
-```cd spotify-project```
+`cd spotify-project`
 
-```npm install```
+`npm install`
 
-```npm start```
-
+`npm start`
 
 If you have any problems, please tell me.
 
 Enjoy!
-
-

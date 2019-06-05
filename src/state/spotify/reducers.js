@@ -10,7 +10,8 @@ export const INITIAL_STATE = {
   list: null,
   user: null,
   album: null,
-  tracks: null
+  tracks: null,
+  music: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
     case LIST_PROFILE:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload
       };
     case SEARCH_MUSIC:
       return {
@@ -34,13 +35,13 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         tracks: action.payload
-      }
+      };
     }
     case LIST_MUSIC: {
       return {
         ...state,
         music: action.payload
-      }
+      };
     }
     default:
       return state;
