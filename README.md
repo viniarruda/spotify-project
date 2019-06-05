@@ -3,7 +3,7 @@
 This project have 2 structures:
 
 - **Webpack + Redux** in branch: `webpack`
-- **React-script + Global State with Context and Hooks** in branch: `master`
+- **React-scripts + Global State with Context and Hooks** in branch: `master`
 
 This project use:
 
