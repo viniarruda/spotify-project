@@ -1,35 +1,33 @@
-import React, {
-  useEffect, useState
-} from 'react'
-import useAlbum from '../../state/spotify/hooks/useAlbum'
-import useTrack from '../../state/spotify/hooks/useTrack'
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { requestAlbum, requestTrack } from "../../store/spotify/thunks";
 
-import Container from './containers/container'
-import Content from './components/content'
-import BackButton from './components/back'
-import DetailAlbum from './components/detail'
-import InfoAlbum from './components/infos'
-import MusicsList from './components/musicsList'
-import MusicsItem from './components/musicsItem'
-import Player from './containers/player'
+import Container from "./containers/container";
+import Content from "./components/content";
+import BackButton from "./components/back";
+import DetailAlbum from "./components/detail";
+import InfoAlbum from "./components/infos";
+import MusicsList from "./components/musicsList";
+import MusicsItem from "./components/musicsItem";
+import Player from "./containers/player";
 
-import Spinner from '../../components/spinner'
+import Spinner from "../../components/spinner";
 
-const Detail = (props) => {
-  const [spotify, isLoading, setAlbum] = useAlbum();
-  const [track, loading, setMusic] = useTrack();
+const Detail = props => {
+  const { spotify, requestAlbum, requestTrack } = props;
+
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
-  const [playing, setPlaying] = useState('');
-  const [actualMusic, setActualMusic] = useState('');
+  const [playing, setPlaying] = useState("");
+  const [actualMusic, setActualMusic] = useState("");
 
   useEffect(() => {
-    setAlbum(props.match.params.artist);
+    requestAlbum(props.match.params.artist);
   }, []);
 
-  const handlePlayMusic = (trackSelected) => {
-    if(!track.music || track.music.length === 0) {
-      setMusic(trackSelected.id);
+  const handlePlayMusic = trackSelected => {
+    if (!spotify.music || spotify.music.length === 0) {
+      requestTrack(trackSelected.id);
     }
     setPlay(true);
     setPlaying(trackSelected.preview_url);
@@ -40,34 +38,54 @@ const Detail = (props) => {
     setPlay(!play);
   };
 
-  const handleChangeVolume = (e) => {
+  const handleChangeVolume = e => {
     setVolume(Number(e));
   };
 
   return (
     <Container>
-      <Spinner show={isLoading || loading} />
+      <Spinner show={spotify.loading} />
       <Content>
-        <BackButton link='/home'>Voltar</BackButton>
-        {
-          spotify.album &&
-            <DetailAlbum>
-              <InfoAlbum {...spotify.album} />
-              <MusicsList>
-              {
-                spotify.tracks && spotify.tracks.items.map((track) =>
-                  <MusicsItem key={track.id} {...track} onClick={() => handlePlayMusic(track)}/>
-                )
-              }
-              </MusicsList>
-            </DetailAlbum>
-          }
-        {
-          track.music && <Player music={track.music} actual={actualMusic} playing={playing} play={play} volume={volume} onClick={() => handleMusic()} onChange={(e) => handleChangeVolume(e) }/>
-        }
+        <BackButton link="/home">Voltar</BackButton>
+        {spotify.album && (
+          <DetailAlbum>
+            <InfoAlbum {...spotify.album} />
+            <MusicsList>
+              {spotify.tracks &&
+                spotify.tracks.items.map(track => (
+                  <MusicsItem
+                    key={track.id}
+                    {...track}
+                    onClick={() => handlePlayMusic(track)}
+                  />
+                ))}
+            </MusicsList>
+          </DetailAlbum>
+        )}
+        {spotify.music && (
+          <Player
+            music={spotify.music}
+            actual={actualMusic}
+            playing={playing}
+            play={play}
+            volume={volume}
+            onClick={() => handleMusic()}
+            onChange={e => handleChangeVolume(e)}
+          />
+        )}
       </Content>
     </Container>
-  )
+  );
 };
 
-export default Detail
+const mapStateToProps = state => ({
+  spotify: state.spotify
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    requestAlbum,
+    requestTrack
+  }
+)(Detail);

@@ -3,7 +3,6 @@ import queryString from "query-string";
 
 export const requestLogin = () => async (dispatch, getState) => {
   dispatch(login());
-  console.log("login");
 
   return true;
 };

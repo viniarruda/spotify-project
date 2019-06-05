@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   user: null,
   album: null,
   tracks: null,
+  music: null,
   loading: false
 };
 

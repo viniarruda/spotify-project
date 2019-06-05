@@ -65,7 +65,7 @@ export const searchItems = term => async (dispatch, getState) => {
   dispatch(searchMusicRequested());
 
   const toLowerCase = term.toLowerCase();
-  const encode = encodeUri(toLowerCase);
+  const encode = encodeURI(toLowerCase);
   const response = await search(encode);
 
   if (!response) {

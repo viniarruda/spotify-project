@@ -8,7 +8,6 @@ import theme from "./theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Button from "./button";
-import useProfile from "../state/spotify/hooks/useProfile";
 
 const Nav = styled.div`
   height: 50px;
@@ -46,7 +45,7 @@ const Header = props => {
   const { auth, spotify } = props;
 
   const handleLogout = async () => {
-    await dispatch(requestLogout());
+    await requestLogout();
   };
 
   return (
