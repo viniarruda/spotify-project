@@ -75,6 +75,6 @@ The server is running in Heroku. The first time have a few delay, because the se
 
 `npm start`
 
-If you have any problems, please tell me.
+If you have any problems, please tell me or open a issue.
 
 Enjoy!
